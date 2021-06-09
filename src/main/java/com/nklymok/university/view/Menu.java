@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+/**
+ * Menu is responsible for handling the command choice and executing the command.
+ * As the element that is responsive for the View layer, Menu aggregates controllers.
+ * Controllers then are passed to the command, so the requested logic may be executed.
+ */
 @Component
 public class Menu {
 

@@ -4,6 +4,11 @@ import com.nklymok.university.command.impl.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * CommandParser handles all the parsing for commands.
+ * The only responsibility is to recognize (or define absense) and
+ * return the needed implementation of Command.
+ */
 @Component
 public class CommandParser {
 

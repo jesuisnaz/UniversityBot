@@ -5,6 +5,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * OutputUtils serves as a simple utility class for Commands. It has only one responsibility:
+ * outputting data in a particular format.
+ */
+
 @Component
 public class OutputUtils {
 
