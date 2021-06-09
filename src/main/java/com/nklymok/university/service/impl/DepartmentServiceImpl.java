@@ -33,6 +33,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return repository.findAll();
     }
 
+    @Override
+    public Department findByName(String name) {
+        return repository.findByName(name);
+    }
+
     @Transactional
     @Override
     public String getDeparmentHeadName(String departmentName) {

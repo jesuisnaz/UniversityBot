@@ -15,15 +15,23 @@ public class ShowDepartmentStatisticsCommand extends UniversityCommand {
     private final String A_P_COUNT_PLACEHOLDER= "{associate_professors_count}";
     private final String PROFESSORS_COUNT_PLACEHOLDER= "{professors_count}";
 
+    private final String DEPT_NOT_FOUND = "Department not found: ";
+
     public ShowDepartmentStatisticsCommand(String departmentName) {
         this.departmentName = departmentName;
     }
 
     @Override
     public void execute() {
+        if (this.getDepartmentService().findByName(departmentName) == null) {
+            this.getOutputUtils().printString(DEPT_NOT_FOUND + departmentName);
+            return;
+        }
+
         int assistantsCount = this.getDepartmentService().countEmployeesByDegree(departmentName, Degree.ASSISTANT);
         int ACsCount = this.getDepartmentService().countEmployeesByDegree(departmentName, Degree.ASSOCIATE_PROFESSOR);
         int ProfessorsCount = this.getDepartmentService().countEmployeesByDegree(departmentName, Degree.PROFESSOR);
+
         String result = RESPONSE_TEMPLATE
                 .replace(ASSISTANTS_COUNT_PLACEHOLDER, String.valueOf(assistantsCount))
                 .replace(A_P_COUNT_PLACEHOLDER, String.valueOf(ACsCount))

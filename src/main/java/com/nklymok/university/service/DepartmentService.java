@@ -9,6 +9,8 @@ public interface DepartmentService {
 
     List<Department> findAll();
 
+    Department findByName(String name);
+
     Department save(Department department);
 
     String getDeparmentHeadName(String departmentName);

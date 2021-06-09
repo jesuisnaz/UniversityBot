@@ -14,6 +14,8 @@ public class GlobalSearchCommand extends UniversityCommand {
 
     private final String pattern;
 
+    private final String NO_MATCH = "Not a single employee matched the pattern: ";
+
     public GlobalSearchCommand(String pattern) {
         this.pattern = pattern;
     }
@@ -21,9 +23,14 @@ public class GlobalSearchCommand extends UniversityCommand {
     @Override
     public void execute() {
         List<Lector> employees = this.getLectorService().findByNamePattern(pattern);
-        this.getOutputUtils().printJoined(
-                employees.stream()
-                        .map(Lector::getFullName)
-                        .collect(Collectors.toList()), ", ");
+        if (employees.isEmpty()) {
+            this.getOutputUtils().printString(NO_MATCH + pattern);
+        }
+        else {
+            this.getOutputUtils().printJoined(
+                    employees.stream()
+                            .map(Lector::getFullName)
+                            .collect(Collectors.toList()), ", ");
+        }
     }
 }
