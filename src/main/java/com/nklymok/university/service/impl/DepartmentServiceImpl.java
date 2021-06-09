@@ -6,6 +6,7 @@ import com.nklymok.university.model.lector.Lector;
 import com.nklymok.university.repository.DepartmentRepository;
 import com.nklymok.university.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,11 @@ import java.util.NoSuchElementException;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository repository;
+
+    @Value("${university.service.dept.dept-not-found}")
+    private String DEPARTMENT_NOT_FOUND;
+    @Value("${university.service.dept.dept-head-not-found}")
+    private String DEPARTMENT_HEAD_NOT_FOUND;
 
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository repository) {
@@ -31,14 +37,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public String getDeparmentHeadName(String departmentName) {
         Department department = repository.findByName(departmentName);
-        if (department == null) throw new NoSuchElementException("Department is not found: " + departmentName);
+        if (department == null) throw new NoSuchElementException(DEPARTMENT_NOT_FOUND + departmentName);
         Long headId = department.getHeadId();
         List<Lector> lectors = department.getEmployees();
 
         for (Lector l : lectors) {
             if (l.getId().equals(headId)) return l.getFullName();
         }
-        throw new NoSuchElementException("Department head not found");
+        throw new NoSuchElementException(DEPARTMENT_HEAD_NOT_FOUND);
     }
 
     @Transactional
