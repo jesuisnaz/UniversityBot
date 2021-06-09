@@ -44,19 +44,6 @@ public class Menu {
             command.setLectorService(lectorService);
             command.setOutputUtils(output);
             command.execute();
-//            if (input.equals("getDs")) System.out.println(departmentService
-//                    .findAll()
-//                    .toString());
-//            if (input.equals("getLs")) System.out.println(lectorService.findAll().toString());
-//            if (input.startsWith("getEC ")) {
-//                System.out.println("Employee count: " + departmentService.getEmployeeCount(input.substring(6)));
-//            }
-//            if (input.startsWith("getECD ")) {
-//                String depName = input.substring(7);
-//                System.out.println("Assistants: " + departmentService.countEmployeesByDegree(depName, Degree.ASSISTANT));
-//                System.out.println("AP: " + departmentService.countEmployeesByDegree(depName, Degree.ASSOCIATE_PROFESSOR));
-//                System.out.println("Professors: " + departmentService.countEmployeesByDegree(depName, Degree.PROFESSOR));
-//            }
         }
     }
 }
